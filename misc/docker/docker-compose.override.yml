@@ -1,0 +1,25 @@
+version: "3.4"
+services:
+  web:
+    build:
+      context: ../../.
+      dockerfile: ./misc/docker/Dockerfile
+      target: builder
+    image: rivanghafara/gin:latest-dev
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    volumes:
+      - ../../.:/go/src/app
+    environment:
+      - DEBUG=true
+      - TZ=Asia/Jakarta
+    # entrypoint:
+    #   - /bin/sh
+    # command:
+    #   - -c
+    #   - npm test
+    command:
+      - tail
+      - -f
+      - /dev/null
